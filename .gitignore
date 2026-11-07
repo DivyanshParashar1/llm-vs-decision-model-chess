@@ -16,3 +16,6 @@ __pycache__/
 
 # os
 .DS_Store
+
+# kaggle push build dirs
+build/
