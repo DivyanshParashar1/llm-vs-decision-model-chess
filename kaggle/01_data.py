@@ -44,7 +44,7 @@ CFG = dict(
     max_abs_eval_cp=500,                  # drop lopsided game positions
     oversample=1.25,                      # extra game positions to survive the eval filter
     sf_url="https://github.com/official-stockfish/Stockfish/releases/download/sf_17.1/stockfish-ubuntu-x86-64-avx2.tar",
-    sf_nodes=300_000, sf_multipv=5, sf_hash_mb=64,
+    sf_nodes=200_000, sf_multipv=5, sf_hash_mb=64,
     gliner_model="fastino/GLiNER2.5-Decide",
     run_gliner_smoke=True,
 )
@@ -268,7 +268,7 @@ def _sf_label(args):
 def get_stockfish():
     tar = download(CFG["sf_url"], os.path.join(RAW, "stockfish.tar"))
     with tarfile.open(tar) as t:
-        t.extractall(RAW)
+        t.extractall(RAW, filter="data")
     path = [p for p in glob.glob(os.path.join(RAW, "stockfish", "stockfish*")) if os.path.isfile(p)][0]
     os.chmod(path, 0o755)
     return path
