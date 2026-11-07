@@ -42,7 +42,7 @@ GEN_DIR = f"{WORK}/gen_llm0"
 print(POS, LIB, sep="\n")
 
 # %%
-sh(f"{sys.executable} -m pip install -q vllm chess")
+sh(f"{sys.executable} -m pip install -q vllm==0.33.0 chess")
 sh("nvidia-smi --query-gpu=name,memory.total --format=csv")
 sh(f"{sys.executable} -m pip list 2>/dev/null | grep -iE '^(vllm|torch|transformers) '")
 
