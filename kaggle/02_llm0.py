@@ -29,7 +29,12 @@ def find(pattern):
     return hits[0]
 
 POS = find("positions.parquet")
-LIB = os.path.dirname(os.path.dirname(find("chessdecide/__init__.py")))
+# the lib dataset may mount flat (files at root) -> expose it as a `chessdecide` package
+_pkg = os.path.dirname(find("proposer.py"))
+LIB = "/kaggle/tmp/lib"
+os.makedirs(LIB, exist_ok=True)
+if not os.path.exists(f"{LIB}/chessdecide"):
+    os.symlink(_pkg, f"{LIB}/chessdecide")
 sys.path.insert(0, LIB)
 os.environ["PYTHONPATH"] = LIB + ":" + os.environ.get("PYTHONPATH", "")
 WORK = "/kaggle/working"
