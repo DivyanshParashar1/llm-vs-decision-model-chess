@@ -41,6 +41,13 @@ def main_table(split, r):
     lines += ["", "McNemar exact p-values (paired top-1):", ""]
     lines += [f"- {k}: p = {v:.4g}" for k, v in r["mcnemar"].items()]
     for col, s in r["slices"].items():
+        # stored as {slice_value: {config: top1}} (pandas to_json default); flip to {config: {slice_value: top1}}
+        if not any(k in ORDER for k in s):
+            flipped = {}
+            for val, d in s.items():
+                for cfg_name, v in d.items():
+                    flipped.setdefault(cfg_name, {})[val] = v
+            s = flipped
         cols = sorted({c for d in s.values() for c in d})
         lines += ["", f"Top-1 % by {col}:", "", "| Config | " + " | ".join(cols) + " |",
                   "|---|" + "---|" * len(cols)]
