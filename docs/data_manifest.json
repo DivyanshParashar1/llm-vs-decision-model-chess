@@ -1,0 +1,67 @@
+{
+  "kaggle_kernel": "divyanshparashar1/chess-01-data",
+  "manifest": {
+    "test": {
+      "n": 2003,
+      "sha256": "160b6a8fa8fa2583dabeb7917844933aaf9dc1ca91bcbfcdd893afb511003b25"
+    },
+    "test_ood": {
+      "n": 509,
+      "sha256": "dfd55dd3a6d3e92e25460a9cfdb70e5545afc419251d82558d5abbefbfb58d3b"
+    },
+    "train": {
+      "n": 19894,
+      "sha256": "40844cad5d8b2bead3fda89aa6bd83d3730c3a94b1550bf78487c295bf775906"
+    },
+    "val": {
+      "n": 2002,
+      "sha256": "7dec4078ccb1166217f9cb72aeb3a35201f869315791d60e9fee962706e4c219"
+    }
+  },
+  "cfg": {
+    "seed": 1234,
+    "n_train": 20000,
+    "n_val": 2000,
+    "n_test": 2000,
+    "n_ood": 500,
+    "n_pilot": 500,
+    "puzzle_frac": 0.6,
+    "max_solver_moves_per_puzzle": 3,
+    "puzzle_rating_bands": [
+      0,
+      1200,
+      1600,
+      2000,
+      2400,
+      99999
+    ],
+    "holdout_themes": [
+      "smotheredMate",
+      "interference",
+      "xRayAttack"
+    ],
+    "puzzles_url": "https://database.lichess.org/lichess_db_puzzle.csv.zst",
+    "games_url": "https://database.lichess.org/standard/lichess_db_standard_rated_2025-01.pgn.zst",
+    "game_skip_plies": 8,
+    "max_pos_per_game": 3,
+    "game_min_base_seconds": 180,
+    "game_elo_bands": [
+      0,
+      1400,
+      1800,
+      2200,
+      99999
+    ],
+    "game_max_parsed": 3000000,
+    "max_abs_eval_cp": 500,
+    "oversample": 1.25,
+    "sf_url": "https://github.com/official-stockfish/Stockfish/releases/download/sf_17.1/stockfish-ubuntu-x86-64-avx2.tar",
+    "sf_nodes": 200000,
+    "sf_multipv": 5,
+    "sf_hash_mb": 64,
+    "gliner_model": "fastino/GLiNER2.5-Decide",
+    "run_gliner_smoke": true
+  },
+  "puzzle_sf_agreement": 0.9965,
+  "sf_minutes": 70.5
+}
