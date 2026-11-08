@@ -1,0 +1,688 @@
+{
+  "test": {
+    "n": 2003,
+    "table": {
+      "C1 LLM0": {
+        "n": 2003,
+        "legal": 0.9865,
+        "legal_ci": "[0.982, 0.992]",
+        "top1": 0.1947,
+        "top1_ci": "[0.177, 0.212]",
+        "top3": 0.3135,
+        "top3_ci": "[0.293, 0.334]",
+        "wp_loss": 0.3934,
+        "wp_loss_ci": "[0.380, 0.407]",
+        "blunder": 0.6595,
+        "blunder_ci": "[0.639, 0.680]",
+        "recall@k": null
+      },
+      "C2 LLM0\u2192D0": {
+        "n": 2003,
+        "legal": 1.0,
+        "legal_ci": "[1.000, 1.000]",
+        "top1": 0.1787,
+        "top1_ci": "[0.162, 0.196]",
+        "top3": 0.3085,
+        "top3_ci": "[0.289, 0.329]",
+        "wp_loss": 0.3953,
+        "wp_loss_ci": "[0.382, 0.409]",
+        "blunder": 0.6605,
+        "blunder_ci": "[0.640, 0.681]",
+        "recall@k": 0.4692960559
+      },
+      "C3 LLM*": {
+        "n": 2003,
+        "legal": 1.0,
+        "legal_ci": "[1.000, 1.000]",
+        "top1": 0.361,
+        "top1_ci": "[0.340, 0.382]",
+        "top3": 0.5057,
+        "top3_ci": "[0.484, 0.528]",
+        "wp_loss": 0.2608,
+        "wp_loss_ci": "[0.248, 0.274]",
+        "blunder": 0.4418,
+        "blunder_ci": "[0.421, 0.463]",
+        "recall@k": null
+      },
+      "C4 LLM0\u2192D*": {
+        "n": 2003,
+        "legal": 1.0,
+        "legal_ci": "[1.000, 1.000]",
+        "top1": 0.2681,
+        "top1_ci": "[0.249, 0.288]",
+        "top3": 0.4274,
+        "top3_ci": "[0.405, 0.449]",
+        "wp_loss": 0.3126,
+        "wp_loss_ci": "[0.299, 0.326]",
+        "blunder": 0.5262,
+        "blunder_ci": "[0.504, 0.548]",
+        "recall@k": 0.4692960559
+      },
+      "C5 LLM*\u2192D*": {
+        "n": 2003,
+        "legal": 1.0,
+        "legal_ci": "[1.000, 1.000]",
+        "top1": 0.3305,
+        "top1_ci": "[0.311, 0.351]",
+        "top3": 0.4933,
+        "top3_ci": "[0.471, 0.515]",
+        "wp_loss": 0.2693,
+        "wp_loss_ci": "[0.256, 0.282]",
+        "blunder": 0.4568,
+        "blunder_ci": "[0.435, 0.478]",
+        "recall@k": 0.5756365452
+      },
+      "X1 D* all-legal": {
+        "n": 2003,
+        "legal": 1.0,
+        "legal_ci": "[1.000, 1.000]",
+        "top1": 0.3265,
+        "top1_ci": "[0.307, 0.347]",
+        "top3": 0.4973,
+        "top3_ci": "[0.475, 0.519]",
+        "wp_loss": 0.2608,
+        "wp_loss_ci": "[0.248, 0.273]",
+        "blunder": 0.4483,
+        "blunder_ci": "[0.427, 0.470]",
+        "recall@k": null
+      },
+      "X2 oracle(LLM0 cands)": {
+        "n": 2003,
+        "legal": 1.0,
+        "legal_ci": "[1.000, 1.000]",
+        "top1": 0.4643,
+        "top1_ci": "[0.442, 0.486]",
+        "top3": 0.6695,
+        "top3_ci": "[0.649, 0.690]",
+        "wp_loss": 0.163,
+        "wp_loss_ci": "[0.152, 0.174]",
+        "blunder": 0.2961,
+        "blunder_ci": "[0.277, 0.316]",
+        "recall@k": null
+      },
+      "X3 random(LLM0 cands)": {
+        "n": 2003,
+        "legal": 1.0,
+        "legal_ci": "[1.000, 1.000]",
+        "top1": 0.0954,
+        "top1_ci": "[0.082, 0.108]",
+        "top3": 0.2346,
+        "top3_ci": "[0.216, 0.253]",
+        "wp_loss": 0.4491,
+        "wp_loss_ci": "[0.436, 0.463]",
+        "blunder": 0.7289,
+        "blunder_ci": "[0.709, 0.748]",
+        "recall@k": null
+      }
+    },
+    "mcnemar": {
+      "C4 LLM0\u2192D* vs C3 LLM*": 3.61864743525186e-17,
+      "C4 LLM0\u2192D* vs C1 LLM0": 3.056902993056465e-14,
+      "C5 LLM*\u2192D* vs C3 LLM*": 0.00031203926022964384,
+      "C5 LLM*\u2192D* vs C4 LLM0\u2192D*": 5.293717546762164e-10,
+      "C2 LLM0\u2192D0 vs C1 LLM0": 0.05062548507202418,
+      "X1 D* all-legal vs C4 LLM0\u2192D*": 6.494965807953047e-09
+    },
+    "full_line_puzzle_solve": {
+      "C1 LLM0": 0.09163346613545817,
+      "C2 LLM0\u2192D0": 0.0796812749003984,
+      "C3 LLM*": 0.21713147410358566,
+      "C4 LLM0\u2192D*": 0.13147410358565736,
+      "C5 LLM*\u2192D*": 0.20119521912350596,
+      "X1 D* all-legal": 0.21713147410358566,
+      "X2 oracle(LLM0 cands)": 0.3207171314741036,
+      "X3 random(LLM0 cands)": 0.0199203187250996
+    },
+    "slices": {
+      "source": {
+        "game": {
+          "C1 LLM0": 0.09,
+          "C2 LLM0\u2192D0": 0.086,
+          "C3 LLM*": 0.202,
+          "C4 LLM0\u2192D*": 0.138,
+          "C5 LLM*\u2192D*": 0.171,
+          "X1 D* all-legal": 0.163,
+          "X2 oracle(LLM0 cands)": 0.312,
+          "X3 random(LLM0 cands)": 0.065
+        },
+        "puzzle": {
+          "C1 LLM0": 0.265,
+          "C2 LLM0\u2192D0": 0.241,
+          "C3 LLM*": 0.467,
+          "C4 LLM0\u2192D*": 0.355,
+          "C5 LLM*\u2192D*": 0.437,
+          "X1 D* all-legal": 0.435,
+          "X2 oracle(LLM0 cands)": 0.566,
+          "X3 random(LLM0 cands)": 0.116
+        }
+      },
+      "phase": {
+        "endgame": {
+          "C1 LLM0": 0.245,
+          "C2 LLM0\u2192D0": 0.225,
+          "C3 LLM*": 0.421,
+          "C4 LLM0\u2192D*": 0.356,
+          "C5 LLM*\u2192D*": 0.404,
+          "X1 D* all-legal": 0.398,
+          "X2 oracle(LLM0 cands)": 0.593,
+          "X3 random(LLM0 cands)": 0.127
+        },
+        "middlegame": {
+          "C1 LLM0": 0.193,
+          "C2 LLM0\u2192D0": 0.176,
+          "C3 LLM*": 0.353,
+          "C4 LLM0\u2192D*": 0.25,
+          "C5 LLM*\u2192D*": 0.333,
+          "X1 D* all-legal": 0.328,
+          "X2 oracle(LLM0 cands)": 0.427,
+          "X3 random(LLM0 cands)": 0.082
+        },
+        "opening": {
+          "C1 LLM0": 0.101,
+          "C2 LLM0\u2192D0": 0.096,
+          "C3 LLM*": 0.269,
+          "C4 LLM0\u2192D*": 0.149,
+          "C5 LLM*\u2192D*": 0.179,
+          "X1 D* all-legal": 0.182,
+          "X2 oracle(LLM0 cands)": 0.322,
+          "X3 random(LLM0 cands)": 0.072
+        }
+      },
+      "band": {
+        "0-1200": {
+          "C1 LLM0": 0.437,
+          "C2 LLM0\u2192D0": 0.345,
+          "C3 LLM*": 0.734,
+          "C4 LLM0\u2192D*": 0.536,
+          "C5 LLM*\u2192D*": 0.702,
+          "X1 D* all-legal": 0.675,
+          "X2 oracle(LLM0 cands)": 0.698,
+          "X3 random(LLM0 cands)": 0.139
+        },
+        "0-1400": {
+          "C1 LLM0": 0.124,
+          "C2 LLM0\u2192D0": 0.079,
+          "C3 LLM*": 0.243,
+          "C4 LLM0\u2192D*": 0.114,
+          "C5 LLM*\u2192D*": 0.168,
+          "X1 D* all-legal": 0.149,
+          "X2 oracle(LLM0 cands)": 0.327,
+          "X3 random(LLM0 cands)": 0.089
+        },
+        "1200-1600": {
+          "C1 LLM0": 0.212,
+          "C2 LLM0\u2192D0": 0.193,
+          "C3 LLM*": 0.505,
+          "C4 LLM0\u2192D*": 0.34,
+          "C5 LLM*\u2192D*": 0.476,
+          "X1 D* all-legal": 0.458,
+          "X2 oracle(LLM0 cands)": 0.509,
+          "X3 random(LLM0 cands)": 0.08
+        },
+        "1400-1800": {
+          "C1 LLM0": 0.072,
+          "C2 LLM0\u2192D0": 0.1,
+          "C3 LLM*": 0.222,
+          "C4 LLM0\u2192D*": 0.139,
+          "C5 LLM*\u2192D*": 0.172,
+          "X1 D* all-legal": 0.172,
+          "X2 oracle(LLM0 cands)": 0.333,
+          "X3 random(LLM0 cands)": 0.072
+        },
+        "1600-2000": {
+          "C1 LLM0": 0.242,
+          "C2 LLM0\u2192D0": 0.22,
+          "C3 LLM*": 0.447,
+          "C4 LLM0\u2192D*": 0.333,
+          "C5 LLM*\u2192D*": 0.379,
+          "X1 D* all-legal": 0.379,
+          "X2 oracle(LLM0 cands)": 0.595,
+          "X3 random(LLM0 cands)": 0.114
+        },
+        "1800-2200": {
+          "C1 LLM0": 0.096,
+          "C2 LLM0\u2192D0": 0.083,
+          "C3 LLM*": 0.193,
+          "C4 LLM0\u2192D*": 0.147,
+          "C5 LLM*\u2192D*": 0.193,
+          "X1 D* all-legal": 0.165,
+          "X2 oracle(LLM0 cands)": 0.298,
+          "X3 random(LLM0 cands)": 0.046
+        },
+        "2000-2400": {
+          "C1 LLM0": 0.259,
+          "C2 LLM0\u2192D0": 0.259,
+          "C3 LLM*": 0.35,
+          "C4 LLM0\u2192D*": 0.313,
+          "C5 LLM*\u2192D*": 0.35,
+          "X1 D* all-legal": 0.391,
+          "X2 oracle(LLM0 cands)": 0.568,
+          "X3 random(LLM0 cands)": 0.14
+        },
+        "2200+": {
+          "C1 LLM0": 0.064,
+          "C2 LLM0\u2192D0": 0.084,
+          "C3 LLM*": 0.153,
+          "C4 LLM0\u2192D*": 0.153,
+          "C5 LLM*\u2192D*": 0.149,
+          "X1 D* all-legal": 0.168,
+          "X2 oracle(LLM0 cands)": 0.292,
+          "X3 random(LLM0 cands)": 0.054
+        },
+        "2400+": {
+          "C1 LLM0": 0.157,
+          "C2 LLM0\u2192D0": 0.174,
+          "C3 LLM*": 0.287,
+          "C4 LLM0\u2192D*": 0.239,
+          "C5 LLM*\u2192D*": 0.27,
+          "X1 D* all-legal": 0.265,
+          "X2 oracle(LLM0 cands)": 0.439,
+          "X3 random(LLM0 cands)": 0.1
+        }
+      }
+    }
+  },
+  "test_ood": {
+    "n": 509,
+    "table": {
+      "C1 LLM0": {
+        "n": 509,
+        "legal": 0.9862,
+        "legal_ci": "[0.974, 0.996]",
+        "top1": 0.279,
+        "top1_ci": "[0.240, 0.318]",
+        "top3": 0.3988,
+        "top3_ci": "[0.358, 0.442]",
+        "wp_loss": 0.5228,
+        "wp_loss_ci": "[0.491, 0.554]",
+        "blunder": 0.7053,
+        "blunder_ci": "[0.666, 0.745]",
+        "recall@k": null
+      },
+      "C2 LLM0\u2192D0": {
+        "n": 509,
+        "legal": 1.0,
+        "legal_ci": "[1.000, 1.000]",
+        "top1": 0.2534,
+        "top1_ci": "[0.216, 0.291]",
+        "top3": 0.3674,
+        "top3_ci": "[0.326, 0.409]",
+        "wp_loss": 0.5418,
+        "wp_loss_ci": "[0.511, 0.572]",
+        "blunder": 0.7367,
+        "blunder_ci": "[0.699, 0.774]",
+        "recall@k": 0.5127701375
+      },
+      "C3 LLM*": {
+        "n": 509,
+        "legal": 1.0,
+        "legal_ci": "[1.000, 1.000]",
+        "top1": 0.4892,
+        "top1_ci": "[0.446, 0.532]",
+        "top3": 0.6326,
+        "top3_ci": "[0.591, 0.674]",
+        "wp_loss": 0.3206,
+        "wp_loss_ci": "[0.290, 0.351]",
+        "blunder": 0.4912,
+        "blunder_ci": "[0.448, 0.534]",
+        "recall@k": null
+      },
+      "C4 LLM0\u2192D*": {
+        "n": 509,
+        "legal": 1.0,
+        "legal_ci": "[1.000, 1.000]",
+        "top1": 0.332,
+        "top1_ci": "[0.291, 0.373]",
+        "top3": 0.499,
+        "top3_ci": "[0.456, 0.542]",
+        "wp_loss": 0.4491,
+        "wp_loss_ci": "[0.418, 0.480]",
+        "blunder": 0.6523,
+        "blunder_ci": "[0.611, 0.694]",
+        "recall@k": 0.5127701375
+      },
+      "C5 LLM*\u2192D*": {
+        "n": 509,
+        "legal": 1.0,
+        "legal_ci": "[1.000, 1.000]",
+        "top1": 0.4695,
+        "top1_ci": "[0.426, 0.513]",
+        "top3": 0.609,
+        "top3_ci": "[0.566, 0.652]",
+        "wp_loss": 0.3346,
+        "wp_loss_ci": "[0.305, 0.365]",
+        "blunder": 0.5088,
+        "blunder_ci": "[0.466, 0.552]",
+        "recall@k": 0.6856581532
+      },
+      "X1 D* all-legal": {
+        "n": 509,
+        "legal": 1.0,
+        "legal_ci": "[1.000, 1.000]",
+        "top1": 0.4656,
+        "top1_ci": "[0.422, 0.509]",
+        "top3": 0.609,
+        "top3_ci": "[0.566, 0.652]",
+        "wp_loss": 0.3326,
+        "wp_loss_ci": "[0.303, 0.362]",
+        "blunder": 0.5187,
+        "blunder_ci": "[0.475, 0.562]",
+        "recall@k": null
+      },
+      "X2 oracle(LLM0 cands)": {
+        "n": 509,
+        "legal": 1.0,
+        "legal_ci": "[1.000, 1.000]",
+        "top1": 0.5108,
+        "top1_ci": "[0.468, 0.554]",
+        "top3": 0.7112,
+        "top3_ci": "[0.672, 0.750]",
+        "wp_loss": 0.2913,
+        "wp_loss_ci": "[0.262, 0.321]",
+        "blunder": 0.4695,
+        "blunder_ci": "[0.426, 0.513]",
+        "recall@k": null
+      },
+      "X3 random(LLM0 cands)": {
+        "n": 509,
+        "legal": 1.0,
+        "legal_ci": "[1.000, 1.000]",
+        "top1": 0.1081,
+        "top1_ci": "[0.081, 0.136]",
+        "top3": 0.2004,
+        "top3_ci": "[0.165, 0.236]",
+        "wp_loss": 0.6619,
+        "wp_loss_ci": "[0.636, 0.687]",
+        "blunder": 0.8802,
+        "blunder_ci": "[0.851, 0.908]",
+        "recall@k": null
+      }
+    },
+    "mcnemar": {
+      "C4 LLM0\u2192D* vs C3 LLM*": 8.489989677999222e-10,
+      "C4 LLM0\u2192D* vs C1 LLM0": 0.022743268128245023,
+      "C5 LLM*\u2192D* vs C3 LLM*": 0.29541328065567,
+      "C5 LLM*\u2192D* vs C4 LLM0\u2192D*": 2.5588303858648052e-09,
+      "C2 LLM0\u2192D0 vs C1 LLM0": 0.11116111910399346,
+      "X1 D* all-legal vs C4 LLM0\u2192D*": 1.6312842830886965e-08
+    },
+    "full_line_puzzle_solve": {
+      "C1 LLM0": 0.15677966101694915,
+      "C2 LLM0\u2192D0": 0.13559322033898305,
+      "C3 LLM*": 0.3432203389830508,
+      "C4 LLM0\u2192D*": 0.1864406779661017,
+      "C5 LLM*\u2192D*": 0.3601694915254237,
+      "X1 D* all-legal": 0.3601694915254237,
+      "X2 oracle(LLM0 cands)": 0.3177966101694915,
+      "X3 random(LLM0 cands)": 0.01694915254237288
+    },
+    "slices": {
+      "source": {
+        "puzzle": {
+          "C1 LLM0": 0.279,
+          "C2 LLM0\u2192D0": 0.253,
+          "C3 LLM*": 0.489,
+          "C4 LLM0\u2192D*": 0.332,
+          "C5 LLM*\u2192D*": 0.47,
+          "X1 D* all-legal": 0.466,
+          "X2 oracle(LLM0 cands)": 0.511,
+          "X3 random(LLM0 cands)": 0.108
+        }
+      },
+      "phase": {
+        "endgame": {
+          "C1 LLM0": 0.392,
+          "C2 LLM0\u2192D0": 0.4,
+          "C3 LLM*": 0.625,
+          "C4 LLM0\u2192D*": 0.442,
+          "C5 LLM*\u2192D*": 0.558,
+          "X1 D* all-legal": 0.567,
+          "X2 oracle(LLM0 cands)": 0.617,
+          "X3 random(LLM0 cands)": 0.108
+        },
+        "middlegame": {
+          "C1 LLM0": 0.243,
+          "C2 LLM0\u2192D0": 0.21,
+          "C3 LLM*": 0.436,
+          "C4 LLM0\u2192D*": 0.304,
+          "C5 LLM*\u2192D*": 0.436,
+          "X1 D* all-legal": 0.431,
+          "X2 oracle(LLM0 cands)": 0.481,
+          "X3 random(LLM0 cands)": 0.102
+        },
+        "opening": {
+          "C1 LLM0": 0.259,
+          "C2 LLM0\u2192D0": 0.185,
+          "C3 LLM*": 0.593,
+          "C4 LLM0\u2192D*": 0.222,
+          "C5 LLM*\u2192D*": 0.519,
+          "X1 D* all-legal": 0.481,
+          "X2 oracle(LLM0 cands)": 0.444,
+          "X3 random(LLM0 cands)": 0.185
+        }
+      },
+      "band": {
+        "0-1200": {
+          "C1 LLM0": 0.382,
+          "C2 LLM0\u2192D0": 0.294,
+          "C3 LLM*": 0.824,
+          "C4 LLM0\u2192D*": 0.363,
+          "C5 LLM*\u2192D*": 0.804,
+          "X1 D* all-legal": 0.804,
+          "X2 oracle(LLM0 cands)": 0.431,
+          "X3 random(LLM0 cands)": 0.098
+        },
+        "1200-1600": {
+          "C1 LLM0": 0.402,
+          "C2 LLM0\u2192D0": 0.412,
+          "C3 LLM*": 0.578,
+          "C4 LLM0\u2192D*": 0.48,
+          "C5 LLM*\u2192D*": 0.598,
+          "X1 D* all-legal": 0.569,
+          "X2 oracle(LLM0 cands)": 0.618,
+          "X3 random(LLM0 cands)": 0.098
+        },
+        "1600-2000": {
+          "C1 LLM0": 0.235,
+          "C2 LLM0\u2192D0": 0.245,
+          "C3 LLM*": 0.431,
+          "C4 LLM0\u2192D*": 0.275,
+          "C5 LLM*\u2192D*": 0.431,
+          "X1 D* all-legal": 0.382,
+          "X2 oracle(LLM0 cands)": 0.5,
+          "X3 random(LLM0 cands)": 0.127
+        },
+        "2000-2400": {
+          "C1 LLM0": 0.196,
+          "C2 LLM0\u2192D0": 0.167,
+          "C3 LLM*": 0.373,
+          "C4 LLM0\u2192D*": 0.304,
+          "C5 LLM*\u2192D*": 0.304,
+          "X1 D* all-legal": 0.343,
+          "X2 oracle(LLM0 cands)": 0.569,
+          "X3 random(LLM0 cands)": 0.108
+        },
+        "2400+": {
+          "C1 LLM0": 0.178,
+          "C2 LLM0\u2192D0": 0.149,
+          "C3 LLM*": 0.238,
+          "C4 LLM0\u2192D*": 0.238,
+          "C5 LLM*\u2192D*": 0.208,
+          "X1 D* all-legal": 0.228,
+          "X2 oracle(LLM0 cands)": 0.436,
+          "X3 random(LLM0 cands)": 0.109
+        }
+      }
+    }
+  },
+  "cost": {
+    "llm_star": {
+      "arm": "LLM*",
+      "base": "unsloth/Qwen3-8B-unsloth-bnb-4bit",
+      "method": "QLoRA r16 a32 (Unsloth)",
+      "gpu": "Tesla T4",
+      "n_gpus_used": 1,
+      "trainable_params": 43646976,
+      "n_train_positions": 19894,
+      "n_examples": 19894,
+      "approx_train_tokens": 7635078,
+      "epochs": 1,
+      "steps": 1244,
+      "train_hours": 6.111,
+      "gpu_hours": 6.111,
+      "peak_vram_gb": 12.26,
+      "final_loss": 0.16957519996396214,
+      "val_sanity_top1": 0.4,
+      "val_sanity_legal": 1.0,
+      "quick": false
+    },
+    "dstar": {
+      "runs": [
+        {
+          "arm": "D*",
+          "n_train_positions": 19894,
+          "epochs": 3,
+          "precision": "fp16",
+          "train_seconds": 5654.923907995224,
+          "peak_vram_gb": 14.21195008,
+          "weight_delta": 0.002660355530679226,
+          "gpu": "Tesla T4",
+          "trainable_params": 486444053,
+          "gpu_hours": 1.571,
+          "val": {
+            "top1": 0.2517482517482518,
+            "gold_acc": 0.43806193806193805,
+            "wp_loss": 0.3141761730512002,
+            "blunder": 0.5444555444555444
+          }
+        }
+      ],
+      "quick": false,
+      "note": "LLM0 candidate generation cost for D* training is in notebook 02 gen_minutes"
+    },
+    "llm0_generation": {
+      "mode": "gen",
+      "llm": "Qwen/Qwen3-8B",
+      "k": 5,
+      "n_pilot": 500,
+      "gen_minutes": 162.0,
+      "table": {
+        "C1 LLM0 single": {
+          "n": 500,
+          "legal": 0.986,
+          "legal_ci": "[0.974, 0.996]",
+          "top1": 0.176,
+          "top1_ci": "[0.144, 0.210]",
+          "top3": 0.292,
+          "top3_ci": "[0.252, 0.332]",
+          "wp_loss": 0.3969,
+          "wp_loss_ci": "[0.370, 0.424]",
+          "blunder": 0.662,
+          "blunder_ci": "[0.620, 0.704]"
+        },
+        "LLM0 first cand": {
+          "n": 500,
+          "legal": 1.0,
+          "legal_ci": "[1.000, 1.000]",
+          "top1": 0.174,
+          "top1_ci": "[0.142, 0.208]",
+          "top3": 0.296,
+          "top3_ci": "[0.256, 0.340]",
+          "wp_loss": 0.395,
+          "wp_loss_ci": "[0.367, 0.421]",
+          "blunder": 0.658,
+          "blunder_ci": "[0.612, 0.700]"
+        },
+        "X3 random cand": {
+          "n": 500,
+          "legal": 1.0,
+          "legal_ci": "[1.000, 1.000]",
+          "top1": 0.092,
+          "top1_ci": "[0.066, 0.116]",
+          "top3": 0.236,
+          "top3_ci": "[0.200, 0.272]",
+          "wp_loss": 0.451,
+          "wp_loss_ci": "[0.424, 0.478]",
+          "blunder": 0.738,
+          "blunder_ci": "[0.700, 0.776]"
+        },
+        "C2 LLM0\u2192D0": {
+          "n": 500,
+          "legal": 1.0,
+          "legal_ci": "[1.000, 1.000]",
+          "top1": 0.184,
+          "top1_ci": "[0.152, 0.218]",
+          "top3": 0.31,
+          "top3_ci": "[0.270, 0.348]",
+          "wp_loss": 0.3843,
+          "wp_loss_ci": "[0.357, 0.411]",
+          "blunder": 0.644,
+          "blunder_ci": "[0.600, 0.688]"
+        },
+        "X2 oracle cand": {
+          "n": 500,
+          "legal": 1.0,
+          "legal_ci": "[1.000, 1.000]",
+          "top1": 0.422,
+          "top1_ci": "[0.380, 0.466]",
+          "top3": 0.662,
+          "top3_ci": "[0.620, 0.702]",
+          "wp_loss": 0.173,
+          "wp_loss_ci": "[0.151, 0.194]",
+          "blunder": 0.326,
+          "blunder_ci": "[0.284, 0.368]"
+        },
+        "X1-base D0 all legal": {
+          "n": 500,
+          "legal": 1.0,
+          "legal_ci": "[1.000, 1.000]",
+          "top1": 0.064,
+          "top1_ci": "[0.042, 0.086]",
+          "top3": 0.19,
+          "top3_ci": "[0.158, 0.226]",
+          "wp_loss": 0.4411,
+          "wp_loss_ci": "[0.415, 0.467]",
+          "blunder": 0.7,
+          "blunder_ci": "[0.658, 0.740]"
+        }
+      },
+      "recall": {
+        "recall@k (best in final cands)": 0.428,
+        "recall@k (best in LLM-only cands)": 0.418,
+        "C1 legal rate": 0.986,
+        "mean valid LLM cands": 4.808
+      },
+      "top1_by_source": {
+        "game": {
+          "C1 LLM0 single": 0.0792079208,
+          "LLM0 first cand": 0.0693069307,
+          "X3 random cand": 0.0594059406,
+          "C2 LLM0\u2192D0": 0.0891089109,
+          "X2 oracle cand": 0.2871287129,
+          "X1-base D0 all legal": 0.0346534653
+        },
+        "puzzle": {
+          "C1 LLM0 single": 0.2416107383,
+          "LLM0 first cand": 0.244966443,
+          "X3 random cand": 0.1140939597,
+          "C2 LLM0\u2192D0": 0.2483221477,
+          "X2 oracle cand": 0.5134228188,
+          "X1-base D0 all legal": 0.0838926174
+        }
+      },
+      "mcnemar": {
+        "C2 vs C1": 0.6778086391424605
+      },
+      "verdict": "GO: oracle beats C1 by 24.6 pts top-1, so a better picker has room to help."
+    },
+    "latency_ms_per_move": {
+      "decider": {
+        "c2": 268.6678344846531,
+        "c4": 407.361311707527,
+        "c5": 118.51650106299455,
+        "x1": 249.26733600485858
+      },
+      "llmstar_gen_s_total": 3205.3
+    }
+  }
+}
