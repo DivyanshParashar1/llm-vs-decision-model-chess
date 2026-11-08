@@ -1,0 +1,20 @@
+{
+  "arm": "LLM*",
+  "base": "unsloth/Qwen3-8B-unsloth-bnb-4bit",
+  "method": "QLoRA r16 a32 (Unsloth)",
+  "gpu": "Tesla T4",
+  "n_gpus_used": 1,
+  "trainable_params": 43646976,
+  "n_train_positions": 19894,
+  "n_examples": 19894,
+  "approx_train_tokens": 7635078,
+  "epochs": 1,
+  "steps": 1244,
+  "train_hours": 6.111,
+  "gpu_hours": 6.111,
+  "peak_vram_gb": 12.26,
+  "final_loss": 0.16957519996396214,
+  "val_sanity_top1": 0.4,
+  "val_sanity_legal": 1.0,
+  "quick": false
+}
