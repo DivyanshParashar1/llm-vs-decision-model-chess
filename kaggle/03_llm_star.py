@@ -94,7 +94,7 @@ class TimeBudget(TrainerCallback):
 cfg = SFTConfig(
     output_dir=f"/kaggle/tmp/llm_star_ckpt", dataset_text_field="text", max_seq_length=MAX_LEN,
     per_device_train_batch_size=BATCH, gradient_accumulation_steps=ACCUM, num_train_epochs=EPOCHS,
-    max_steps=20 if QUICK else -1, learning_rate=LR, lr_scheduler_type="cosine", warmup_ratio=0.03,
+    max_steps=20 if QUICK else -1, learning_rate=LR, lr_scheduler_type="cosine", warmup_steps=5 if QUICK else 40,
     logging_steps=10, fp16=not torch.cuda.is_bf16_supported(), bf16=torch.cuda.is_bf16_supported(),
     optim="adamw_8bit", weight_decay=0.0, seed=SEED, save_strategy="no", report_to="none", packing=False)
 try:
