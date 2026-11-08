@@ -10,7 +10,7 @@
 # Output: `dstar_<n>/` checkpoints, `dstar_val.json`, `cost_dstar.json`.
 
 # %%
-import glob, inspect, json, os, subprocess, sys, time
+import glob, inspect, json, os, shutil, subprocess, sys, time
 
 def sh(cmd):
     print("$", cmd, flush=True); subprocess.run(cmd, shell=True, check=True)
@@ -28,7 +28,7 @@ BATCH = 8
 ENC_LR, TASK_LR = 1e-5, 5e-4
 SEED = 0
 if QUICK:
-    SIZES, EPOCHS = [100], 1
+    SIZES, EPOCHS = [100], 3
 
 sh(f'{sys.executable} -m pip install -q chess "gliner2[local]"')
 POS = find("positions.parquet")
@@ -103,12 +103,23 @@ for n in SIZES:
     cfg = TrainingConfig(**{k: v for k, v in want.items() if k in params})
     trainer = GLiNER2Trainer(model=model, config=cfg, train_data=TrainingDataset(to_examples(train_all.head(n))),
                              eval_data=TrainingDataset(val_ex))
+    name0, p0 = next((k, v.detach().float().cpu().clone()) for k, v in model.named_parameters() if v.requires_grad)
     torch.cuda.reset_peak_memory_stats()
     t0 = time.time()
     trainer.train()
     secs = time.time() - t0
-    model.save_pretrained(out)
-    del trainer, model; torch.cuda.empty_cache()
+    trained = getattr(trainer, "model", model)
+    trained = getattr(trained, "module", trained)  # unwrap DDP/accelerate if present
+    delta = (dict(trained.named_parameters())[name0].detach().float().cpu() - p0).abs().max().item()
+    print(f"max |Δ| of {name0} after training: {delta:.3e}", flush=True)
+    assert delta > 0, "weights did not change: trainer is not training the model we hold"
+    finals = sorted(glob.glob(f"{cfg.output_dir}/**/final", recursive=True))
+    if finals:  # prefer the trainer's own saved checkpoint
+        shutil.copytree(finals[0], out, dirs_exist_ok=True)
+        print("using trainer checkpoint", finals[0], os.listdir(out))
+    else:
+        trained.save_pretrained(out)
+    del trainer, model, trained; torch.cuda.empty_cache()
     r = evaluate(out, val)
     results[f"D* n={n}"] = r
     costs.append(dict(arm="D*", n_train_positions=n, epochs=EPOCHS, gpu=torch.cuda.get_device_name(0), n_gpus_used=1,
