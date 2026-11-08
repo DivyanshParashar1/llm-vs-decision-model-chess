@@ -1,0 +1,115 @@
+{
+  "mode": "gen",
+  "llm": "Qwen/Qwen3-8B",
+  "k": 5,
+  "n_pilot": 500,
+  "gen_minutes": 162.0,
+  "table": {
+    "C1 LLM0 single": {
+      "n": 500,
+      "legal": 0.986,
+      "legal_ci": "[0.974, 0.996]",
+      "top1": 0.176,
+      "top1_ci": "[0.144, 0.210]",
+      "top3": 0.292,
+      "top3_ci": "[0.252, 0.332]",
+      "wp_loss": 0.3969,
+      "wp_loss_ci": "[0.370, 0.424]",
+      "blunder": 0.662,
+      "blunder_ci": "[0.620, 0.704]"
+    },
+    "LLM0 first cand": {
+      "n": 500,
+      "legal": 1.0,
+      "legal_ci": "[1.000, 1.000]",
+      "top1": 0.174,
+      "top1_ci": "[0.142, 0.208]",
+      "top3": 0.296,
+      "top3_ci": "[0.256, 0.340]",
+      "wp_loss": 0.395,
+      "wp_loss_ci": "[0.367, 0.421]",
+      "blunder": 0.658,
+      "blunder_ci": "[0.612, 0.700]"
+    },
+    "X3 random cand": {
+      "n": 500,
+      "legal": 1.0,
+      "legal_ci": "[1.000, 1.000]",
+      "top1": 0.092,
+      "top1_ci": "[0.066, 0.116]",
+      "top3": 0.236,
+      "top3_ci": "[0.200, 0.272]",
+      "wp_loss": 0.451,
+      "wp_loss_ci": "[0.424, 0.478]",
+      "blunder": 0.738,
+      "blunder_ci": "[0.700, 0.776]"
+    },
+    "C2 LLM0\u2192D0": {
+      "n": 500,
+      "legal": 1.0,
+      "legal_ci": "[1.000, 1.000]",
+      "top1": 0.184,
+      "top1_ci": "[0.152, 0.218]",
+      "top3": 0.31,
+      "top3_ci": "[0.270, 0.348]",
+      "wp_loss": 0.3843,
+      "wp_loss_ci": "[0.357, 0.411]",
+      "blunder": 0.644,
+      "blunder_ci": "[0.600, 0.688]"
+    },
+    "X2 oracle cand": {
+      "n": 500,
+      "legal": 1.0,
+      "legal_ci": "[1.000, 1.000]",
+      "top1": 0.422,
+      "top1_ci": "[0.380, 0.466]",
+      "top3": 0.662,
+      "top3_ci": "[0.620, 0.702]",
+      "wp_loss": 0.173,
+      "wp_loss_ci": "[0.151, 0.194]",
+      "blunder": 0.326,
+      "blunder_ci": "[0.284, 0.368]"
+    },
+    "X1-base D0 all legal": {
+      "n": 500,
+      "legal": 1.0,
+      "legal_ci": "[1.000, 1.000]",
+      "top1": 0.064,
+      "top1_ci": "[0.042, 0.086]",
+      "top3": 0.19,
+      "top3_ci": "[0.158, 0.226]",
+      "wp_loss": 0.4411,
+      "wp_loss_ci": "[0.415, 0.467]",
+      "blunder": 0.7,
+      "blunder_ci": "[0.658, 0.740]"
+    }
+  },
+  "recall": {
+    "recall@k (best in final cands)": 0.428,
+    "recall@k (best in LLM-only cands)": 0.418,
+    "C1 legal rate": 0.986,
+    "mean valid LLM cands": 4.808
+  },
+  "top1_by_source": {
+    "game": {
+      "C1 LLM0 single": 0.0792079208,
+      "LLM0 first cand": 0.0693069307,
+      "X3 random cand": 0.0594059406,
+      "C2 LLM0\u2192D0": 0.0891089109,
+      "X2 oracle cand": 0.2871287129,
+      "X1-base D0 all legal": 0.0346534653
+    },
+    "puzzle": {
+      "C1 LLM0 single": 0.2416107383,
+      "LLM0 first cand": 0.244966443,
+      "X3 random cand": 0.1140939597,
+      "C2 LLM0\u2192D0": 0.2483221477,
+      "X2 oracle cand": 0.5134228188,
+      "X1-base D0 all legal": 0.0838926174
+    }
+  },
+  "mcnemar": {
+    "C2 vs C1": 0.6778086391424605
+  },
+  "verdict": "GO: oracle beats C1 by 24.6 pts top-1, so a better picker has room to help."
+}
