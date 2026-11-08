@@ -1,0 +1,7 @@
+{
+  "note": "From chess-05-dstar v3 (crashed at n=10000 due to an fp16 no-op run in the same process). n=5000 run was valid (weights changed, loss decreasing). Val = 2,002 positions.",
+  "D0 (base)": {"top1": 0.1813},
+  "first cand": {"top1": 0.1863},
+  "oracle": {"top1": 0.4351},
+  "D* n=5000": {"top1": 0.2488, "gold_acc": 0.4196, "wp_loss": 0.3238, "blunder": 0.5614, "train_minutes": 25.3, "epoch_loss": [16.89, 16.24, 15.92]}
+}
