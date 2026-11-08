@@ -1,0 +1,60 @@
+{
+  "runs": [
+    {
+      "arm": "D*",
+      "n_train_positions": 19894,
+      "epochs": 3,
+      "precision": "fp16",
+      "train_seconds": 5732.468233585358,
+      "peak_vram_gb": 14.21195008,
+      "weight_delta": 0.0027588214725255966,
+      "gpu": "Tesla T4",
+      "trainable_params": 486444053,
+      "gpu_hours": 1.592,
+      "val": {
+        "top1": 0.2547452547452547,
+        "gold_acc": 0.43456543456543456,
+        "wp_loss": 0.31408348427482224,
+        "blunder": 0.5394605394605395
+      }
+    },
+    {
+      "arm": "D*",
+      "n_train_positions": 5000,
+      "epochs": 3,
+      "precision": "fp16",
+      "train_seconds": 1447.1182887554169,
+      "peak_vram_gb": 14.08338176,
+      "weight_delta": 0.0014137253165245056,
+      "gpu": "Tesla T4",
+      "trainable_params": 486444053,
+      "gpu_hours": 0.402,
+      "val": {
+        "top1": 0.25424575424575424,
+        "gold_acc": 0.4225774225774226,
+        "wp_loss": 0.3231138488927435,
+        "blunder": 0.5654345654345654
+      }
+    },
+    {
+      "arm": "D*",
+      "n_train_positions": 10000,
+      "epochs": 3,
+      "precision": "fp16",
+      "train_seconds": 2885.4516434669495,
+      "peak_vram_gb": 14.311084032,
+      "weight_delta": 0.0019891513511538506,
+      "gpu": "Tesla T4",
+      "trainable_params": 486444053,
+      "gpu_hours": 0.802,
+      "val": {
+        "top1": 0.24425574425574426,
+        "gold_acc": 0.4210789210789211,
+        "wp_loss": 0.32020792433519357,
+        "blunder": 0.5474525474525475
+      }
+    }
+  ],
+  "quick": false,
+  "note": "LLM0 candidate generation cost for D* training is in notebook 02 gen_minutes"
+}
