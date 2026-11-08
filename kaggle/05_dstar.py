@@ -22,7 +22,7 @@ def find(pattern):
 
 QUICK = True
 BASE = "fastino/GLiNER2.5-Decide"
-SIZES = [5_000, 10_000, 20_000]
+SIZES = [20_000, 5_000, 10_000]   # largest first: it is D* for notebook 06
 EPOCHS = 3
 BATCH = 8
 ENC_LR, TASK_LR = 1e-5, 5e-4
@@ -38,6 +38,7 @@ LIB = "/kaggle/tmp/lib"; os.makedirs(LIB, exist_ok=True)
 if not os.path.exists(f"{LIB}/chessdecide"):
     os.symlink(_pkg, f"{LIB}/chessdecide")
 sys.path.insert(0, LIB)
+os.environ["PYTHONPATH"] = LIB + ":" + os.environ.get("PYTHONPATH", "")
 WORK = "/kaggle/working"
 
 # %%
@@ -45,13 +46,7 @@ import chess
 import numpy as np
 import pandas as pd
 import torch
-from gliner2 import AutoExtractor
-from gliner2.training.data import Classification, InputExample, TrainingDataset
-from gliner2.training.trainer import GLiNER2Trainer, TrainingConfig
-
-from chessdecide.decider import TASK, GlinerDecider, render_labels, render_text
-
-print("TrainingConfig params:", list(inspect.signature(TrainingConfig).parameters))
+from chessdecide.decider import GlinerDecider
 pos = pd.read_parquet(POS)
 lab = pd.read_parquet(LAB).merge(pos[["id", "fen", "source", "sf_best_uci"]], on="id")
 train_all = lab[lab["split"] == "train"].sample(frac=1.0, random_state=SEED)
@@ -59,18 +54,6 @@ val = lab[lab["split"] == "val"]
 if QUICK and len(train_all) == 0:  # smoke test on pilot-only candidates: train on val just to exercise the API
     train_all = val.copy()
 print(f"train {len(train_all):,} / val {len(val):,}; best-in-cands train {train_all.best_in_cands.mean():.1%}")
-
-
-def to_examples(df):
-    exs = []
-    for r in df.itertuples(index=False):
-        labs = render_labels(json.loads(r.cands))
-        exs.append(InputExample(text=render_text(chess.Board(r.fen)), classifications=[
-            Classification(task=TASK, labels=list(labs), true_label=r.gold_san, label_descriptions=labs)]))
-    return exs
-
-
-val_ex = to_examples(val.head(500))
 
 
 def evaluate(model_path, df):
@@ -91,44 +74,32 @@ results["oracle"] = dict(top1=float(val.best_in_cands.mean()), wp_loss=float(val
 print(json.dumps(results, indent=1))
 
 # %%
+# Each size trains in its own process (fresh AMP/optimizer state); fp16 first, fp32 retry if it was a no-op.
 costs = []
 for n in SIZES:
     n = min(n, len(train_all))
     out = f"{WORK}/dstar_{n}"
-    model = AutoExtractor.from_pretrained(BASE).to("cuda")
-    want = dict(output_dir=f"/kaggle/tmp/dstar_ckpt_{n}", experiment_name=f"dstar_{n}", num_epochs=EPOCHS,
-                batch_size=BATCH, eval_batch_size=16, encoder_lr=ENC_LR, task_lr=TASK_LR, seed=SEED,
-                fp16=True, bf16=False, logging_steps=50, report_to="none")
-    params = inspect.signature(TrainingConfig).parameters
-    cfg = TrainingConfig(**{k: v for k, v in want.items() if k in params})
-    trainer = GLiNER2Trainer(model=model, config=cfg, train_data=TrainingDataset(to_examples(train_all.head(n))),
-                             eval_data=TrainingDataset(val_ex))
-    name0, p0 = next((k, v.detach().float().cpu().clone()) for k, v in model.named_parameters() if v.requires_grad)
-    torch.cuda.reset_peak_memory_stats()
-    t0 = time.time()
-    trainer.train()
-    secs = time.time() - t0
-    trained = getattr(trainer, "model", model)
-    trained = getattr(trained, "module", trained)  # unwrap DDP/accelerate if present
-    delta = (dict(trained.named_parameters())[name0].detach().float().cpu() - p0).abs().max().item()
-    print(f"max |Δ| of {name0} after training: {delta:.3e}", flush=True)
-    assert delta > 0, "weights did not change: trainer is not training the model we hold"
-    finals = sorted(glob.glob(f"{cfg.output_dir}/**/final", recursive=True))
-    if finals:  # prefer the trainer's own saved checkpoint
-        shutil.copytree(finals[0], out, dirs_exist_ok=True)
-        print("using trainer checkpoint", finals[0], os.listdir(out))
-    else:
-        trained.save_pretrained(out)
-    del trainer, model, trained; torch.cuda.empty_cache()
+    for prec in ["fp16", "fp32"]:
+        rc = subprocess.run(f"{sys.executable} -m chessdecide.train_decider --labeled {LAB} --positions {POS} "
+                            f"--n {n} --out {out} --epochs {EPOCHS} --batch {BATCH} --encoder-lr {ENC_LR} "
+                            f"--task-lr {TASK_LR} --precision {prec} --seed {SEED}", shell=True).returncode
+        if rc == 0:
+            break
+        print(f"n={n}: {prec} run failed (rc={rc})" + ("; retrying in fp32" if prec == "fp16" else ""), flush=True)
+    if rc != 0:
+        results[f"D* n={n}"] = dict(error=f"training failed rc={rc}")
+        continue
+    meta = json.load(open(f"{out}/train_meta.json"))
     r = evaluate(out, val)
     results[f"D* n={n}"] = r
-    costs.append(dict(arm="D*", n_train_positions=n, epochs=EPOCHS, gpu=torch.cuda.get_device_name(0), n_gpus_used=1,
-                      trainable_params=486_400_000, train_hours=round(secs / 3600, 3), gpu_hours=round(secs / 3600, 3),
-                      peak_vram_gb=round(torch.cuda.max_memory_allocated() / 1e9, 2), val=r))
-    print(f"n={n}: {secs/60:.1f} min, val {r}", flush=True)
+    costs.append(dict(arm="D*", **meta, gpu_hours=round(meta["train_seconds"] / 3600, 3), val=r))
+    print(f"n={n}: {meta['train_seconds']/60:.1f} min ({meta['precision']}), val {r}", flush=True)
+    if n != max(SIZES):  # keep only the largest checkpoint in the output (it is D* for notebook 06)
+        shutil.rmtree(out, ignore_errors=True)
+    # save after every size so partial results survive a crash
+    json.dump(results, open(f"{WORK}/dstar_val.json", "w"), indent=2)
+    json.dump(dict(runs=costs, quick=QUICK, note="LLM0 candidate generation cost for D* training is in notebook 02 gen_minutes"),
+              open(f"{WORK}/cost_dstar.json", "w"), indent=2)
 
 print(pd.DataFrame(results).T.round(4))
-json.dump(results, open(f"{WORK}/dstar_val.json", "w"), indent=2)
-json.dump(dict(runs=costs, quick=QUICK, note="LLM0 candidate generation cost for D* training is in notebook 02 gen_minutes"),
-          open(f"{WORK}/cost_dstar.json", "w"), indent=2)
 print(sorted(os.listdir(WORK)))
