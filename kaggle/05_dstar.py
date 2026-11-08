@@ -56,6 +56,8 @@ pos = pd.read_parquet(POS)
 lab = pd.read_parquet(LAB).merge(pos[["id", "fen", "source", "sf_best_uci"]], on="id")
 train_all = lab[lab["split"] == "train"].sample(frac=1.0, random_state=SEED)
 val = lab[lab["split"] == "val"]
+if QUICK and len(train_all) == 0:  # smoke test on pilot-only candidates: train on val just to exercise the API
+    train_all = val.copy()
 print(f"train {len(train_all):,} / val {len(val):,}; best-in-cands train {train_all.best_in_cands.mean():.1%}")
 
 
