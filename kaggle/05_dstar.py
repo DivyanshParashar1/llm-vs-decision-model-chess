@@ -94,7 +94,8 @@ for n in SIZES:
     results[f"D* n={n}"] = r
     costs.append(dict(arm="D*", **meta, gpu_hours=round(meta["train_seconds"] / 3600, 3), val=r))
     print(f"n={n}: {meta['train_seconds']/60:.1f} min ({meta['precision']}), val {r}", flush=True)
-    if n != max(SIZES):  # keep only the largest checkpoint in the output (it is D* for notebook 06)
+    n_keep = min(max(SIZES), len(train_all))  # actual size of the largest run
+    if n != n_keep:  # keep only the largest checkpoint in the output (it is D* for notebook 06)
         shutil.rmtree(out, ignore_errors=True)
     # save after every size so partial results survive a crash
     json.dump(results, open(f"{WORK}/dstar_val.json", "w"), indent=2)
@@ -102,4 +103,7 @@ for n in SIZES:
               open(f"{WORK}/cost_dstar.json", "w"), indent=2)
 
 print(pd.DataFrame(results).T.round(4))
+kept = glob.glob(f"{WORK}/dstar_*/model.safetensors")
+print("kept checkpoints:", kept)
+assert kept, "no D* checkpoint left in the output"
 print(sorted(os.listdir(WORK)))
